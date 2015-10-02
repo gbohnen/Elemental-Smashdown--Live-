@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: d1188e2f0a94ce7429056e1df3cc81ee
+timeCreated: 1429041168
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - cardBack: {instanceID: 0}
+  - cardFront: {instanceID: 0}
+  - fire_beelzebub: {instanceID: 0}
+  - fire_fireAnt: {instanceID: 0}
+  - fire_fireElemental: {instanceID: 0}
+  - fire_magmaMasher: {instanceID: 0}
+  - fire_phoenix: {instanceID: 0}
+  - fire_salamander: {instanceID: 0}
+  - grass_bengalTiger: {instanceID: 0}
+  - grass_giantCaterpillar: {instanceID: 0}
+  - grass_grassElemental: {instanceID: 0}
+  - grass_unicorn: {instanceID: 0}
+  - grass_venusSnapdragon: {instanceID: 0}
+  - grass_vineSnake: {instanceID: 0}
+  - neutral_grandpaTim: {instanceID: 0}
+  - neutral_mechanicalMan: {instanceID: 0}
+  - water_giantTortoise: {instanceID: 0}
+  - water_lochNessMonster: {instanceID: 0}
+  - water_merman: {instanceID: 0}
+  - water_poseidon: {instanceID: 0}
+  - water_waterElemental: {instanceID: 0}
+  - water_waterStrider: {instanceID: 0}
+  - prefabSprite: {fileID: 131984, guid: b2e6b92a79897d44799c6eca1f9a38e4, type: 2}
+  - prefabCard: {fileID: 150994, guid: 399fa50a9ec64a94494169e779292bfc, type: 2}
+  - deckAnchor: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

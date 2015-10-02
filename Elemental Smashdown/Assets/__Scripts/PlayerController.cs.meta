@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 840e4f70d6b958a4bbb107aefad4eb6b
+timeCreated: 1442610226
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - indicatorPrefab: {fileID: 197386, guid: e1abb52d19cd4344a891ece2b2aa6cde, type: 2}
+  - player1card: {instanceID: 0}
+  - player2card: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
