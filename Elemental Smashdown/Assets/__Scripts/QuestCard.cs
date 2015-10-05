@@ -17,17 +17,23 @@ public class QuestCard : MonoBehaviour {
 
 	float time = .5f;
 
+    public string text;
+    public string help;
+
 	void Start(){
+        text = GetComponentInChildren<TextMesh>().text;
 		startSize = new Vector3 (1, 1, 1);
 		targetSize = new Vector3 (1.2f, 1.2f, 1);
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+        TextMesh mesh = GetComponentInChildren<TextMesh>();
 	
 		SpriteRenderer sprite = GetComponent<SpriteRenderer>();
 
-		if (isCompleted && !isFlipped) {
+		if (isCompleted) {
 			sprite.sprite = complete;
 		}  
 		else if (isFlipped) 
@@ -38,6 +44,17 @@ public class QuestCard : MonoBehaviour {
 		{
 			sprite.sprite = front;
 		}
+
+        if (isFlipped)
+        {
+            mesh.text = help;
+            mesh.fontSize = 12;
+        }
+        else
+        {
+            mesh.text = text;
+            mesh.fontSize = 12;
+        }
 
 	}
 
