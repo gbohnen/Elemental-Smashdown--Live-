@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
-public class PlayerController : MonoBehaviour {
+[System.Serializable]
+public class PlayerController : MonoBehaviour
+{
 
+    [SerializeField]
     public static PlayerTurn whichTurn = PlayerTurn.Player1;
-
-    public GameObject indicatorPrefab;
-
+    [SerializeField]
     public Card player1card;
+    [SerializeField]
     public Card player2card;
-
+    [SerializeField]
     public bool player1selected = false;
+    [SerializeField]
     public bool player2selected = false;
-
+    [SerializeField]
     public Card[] player1Hand;
+    [SerializeField]
     public Card[] player2Hand;
-
-    public ActiveIndicator[] player1Indicators;
-    public ActiveIndicator[] player2Indicators;
 
 	// Use this for initialization
 	void Start () {
@@ -43,18 +45,6 @@ public class PlayerController : MonoBehaviour {
         RotateCards();
         ChangeBackground();
         ChangeBackground();
-
-        // indicator code
-        player1Indicators = new ActiveIndicator[5];
-        player2Indicators = new ActiveIndicator[5];
-        
-        GameObject temp = Instantiate(indicatorPrefab);
-        
-        for (int i = 0; i < 5; i++)
-        {
-            player1Indicators[i] = temp.GetComponent<ActiveIndicator>();
-            player2Indicators[i] = Instantiate(indicatorPrefab).GetComponent<ActiveIndicator>();
-        }
 	}
 	
 	// Update is called once per frame
@@ -144,25 +134,7 @@ public class PlayerController : MonoBehaviour {
             SoundManager.instance.PlaySound("selectDown", .5f);
         }
 
-        // call the fight method
-        if (player1selected && player2selected)
-        {
-            Fight(player1card, player2card);
-
-            // set cards as attacked
-            player1card.attacked = true;
-            player2card.attacked = true;
-
-            // reset cards
-			player1card.transform.localScale -= new Vector3((float)0.40, (float)0.40, 0);
-            player2card.transform.localScale -= new Vector3((float)0.40, (float)0.40, 0);
-            player1card.selected = false;
-            player2card.selected = false;
-            player1selected = false;
-            player2selected = false;
-            player1card = null;
-            player2card = null;
-        }
+        
     }
 
 	IEnumerator ScaleUpOverTime(Card temp, float time)
@@ -181,7 +153,14 @@ public class PlayerController : MonoBehaviour {
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
+		CheckBothSelected ();
 	}
+
+	IEnumerator Wait(int seconds)
+	{
+		yield return new WaitForSeconds (seconds);
+	}
+
 
 	IEnumerator ScaleDownOverTime(Card temp, float time)
 	{
@@ -231,6 +210,23 @@ public class PlayerController : MonoBehaviour {
 			yield return null;
 		} while (currentTime <= time);
 		
+	}
+
+	IEnumerator MoveTo(Card temp, Vector3 target, float time)
+	{
+		// set the current size and target size
+		Vector3 originalPos = temp.transform.position;
+		
+		// zero the time
+		float currentTime = 0.0f;
+		
+		do
+		{
+			// scale up and increase time each frame
+			temp.transform.position = Vector3.Lerp(originalPos, target, currentTime / time);
+			currentTime += Time.deltaTime;
+			yield return new WaitForSeconds(1);
+		} while (currentTime <= time);
 	}
 
     public void Fight(Card player1, Card player2)
@@ -381,6 +377,7 @@ public class PlayerController : MonoBehaviour {
             QuadBackground.currentType = BackgroundType.Water;
         }
     }
+
     public void ResetHands()
     {
         foreach (Card card in player1Hand)
@@ -394,22 +391,8 @@ public class PlayerController : MonoBehaviour {
             card.selected = false;
             card.attacked = false;
         }
-        
-        
-              
-        
-        
-        
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    player1Hand[i].selected = false;
-        //    player1Hand[i].attacked = false;
-        //    player1Hand[i].dead = false;
-        //    player2Hand[i].selected = false;
-        //    player2Hand[i].attacked = false;
-        //    player2Hand[i].dead = false;
-        //}
     }
+
     IEnumerator ChangePosition(Card temp, float time, Vector3 destination)
     {
         // set the current size and target size
@@ -438,4 +421,114 @@ public class PlayerController : MonoBehaviour {
             SoundManager.instance.PlaySound("badAttack", 1f);
         }
     }
+
+    public void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 100, 120, 30), "Save Game"))
+        {
+            SaveData data = new SaveData(whichTurn, player1card, player2card, player1selected, player2selected, player1Hand, player2Hand);
+
+            //data.whichTurn = whichTurn;
+            //data.player1card = player1card;
+            //data.player2card = player2card;
+            //data.player1selected = player1selected;
+            //data.player2selected = player2selected;
+            //data.player1Hand = player1Hand;
+            //data.player2Hand = player2Hand;
+
+            SaveLoad.Save();
+        }
+        if (GUI.Button(new Rect(10, 140, 120, 30), "Load Last Game"))
+        {
+            SaveLoad.Load();
+        }
+    }
+
+	public void CombatAnimation(Card player1, Card player2)
+	{
+		StartCoroutine(MoveTo(player1, new Vector3 (0, 0, 0), 1f));
+		StartCoroutine(MoveTo(player2, new Vector3 (0, 0, 0), 1f));
+	}
+
+	public void CheckBothSelected()
+	{
+		// call the fight method
+		if (player1selected && player2selected) {
+			Fight (player1card, player2card);
+			
+			// set cards as attacked
+			player1card.attacked = true;
+			player2card.attacked = true;
+			
+			// reset cards
+			player1card.transform.localScale -= new Vector3 ((float)0.40, (float)0.40, 0);
+			player2card.transform.localScale -= new Vector3 ((float)0.40, (float)0.40, 0);
+			player1card.selected = false;
+			player2card.selected = false;
+			player1selected = false;
+			player2selected = false;
+			player1card = null;
+			player2card = null;
+		}
+
+	}
+//    public void Deserialize(MyData data)
+//    {
+//        whichTurn = data.whichTurn;
+
+//        player1card = data.player1card;
+//        player2card = data.player2card;
+
+//        player1selected = data.player1selected;
+//        player2selected = data.player2selected;
+
+//        for (int i = 0; i < 5; i++)
+//        {
+//            if (data.player1Hand[i] != null)
+//            {
+//                player1Hand[i] = data.player1Hand[i];
+//            }
+//            if (data.player2Hand[i] != null)
+//            {
+//                player2Hand[i] = data.player2Hand[i];
+//            }
+//        }
+//    }
+
+//    public MyData Serialize()
+//    {
+//        MyData data = new MyData();
+
+//        data.whichTurn = whichTurn;
+
+//        if (player1card)
+//        {
+//            data.player1card = player1card;
+//        }
+//        if (player2card)
+//        {
+//            data.player2card = player2card;
+//        }
+
+//        data.player1selected = player1selected;
+//        data.player2selected = player2selected;
+
+//        for (int i = 0; i < 5; i++)
+//        {
+//            if (player1Hand[i] != null)
+//            {
+//                data.player1Hand[i] = player1Hand[i];
+//            }
+//            if (player2Hand[i] != null)
+//            {
+//                data.player2Hand[i] = player2Hand[i];
+//            }
+//        }
+
+//        return data;
+//    }
+//    void ISerializable.GetObjectData(SerializationInfo oInfo, StreamingContext oContext)
+//    {
+
+//    }
 }

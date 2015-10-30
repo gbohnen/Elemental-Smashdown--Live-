@@ -1,19 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\TutorialText.cs">
     <Files>
-      <File FileName="Assets\__Scripts\QuestCard.cs" Line="14" Column="2" />
-      <File FileName="Assets\__Scripts\movesText.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\MovesRemaining.cs" Line="21" Column="4" />
-      <File FileName="Assets\__Scripts\Player1Score.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\Player2Score.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\TurnButton.cs" Line="6" Column="1" />
-      <File FileName="Assets\__Scripts\PlayerController.cs" Line="74" Column="10" />
       <File FileName="Assets\__Scripts\ActiveIndicator.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\movesRemaining1.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\Card.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\Menus.cs" Line="44" Column="1" />
-      <File FileName="Assets\__Scripts\Background.cs" Line="31" Column="6" />
+      <File FileName="Assets\__Scripts\BackgroundType.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\Menus\Menus.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\TutorialButtons.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\HUD\CardsRemaining.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\PageCount.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\TutorialText.cs" Line="9" Column="74" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

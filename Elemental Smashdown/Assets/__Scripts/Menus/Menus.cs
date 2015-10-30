@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Menus : MonoBehaviour
 {
+	public bool loadTutorial = true;
 
     // Use this for initialization
     void Start()
@@ -18,7 +19,10 @@ public class Menus : MonoBehaviour
     public void StartButtonPressed()
     {
         SoundManager.instance.PlaySound("click", 1f);
-        Application.LoadLevel("play");
+		if (loadTutorial)
+			Application.LoadLevel ("tutorial");
+		else
+			Application.LoadLevel ("play");
     }
     public void QuitButtonPressed()
     {
@@ -40,4 +44,9 @@ public class Menus : MonoBehaviour
         SoundManager.instance.PlaySound("click", 1f);
         Application.LoadLevel("Main menu");
     }
+	public void TogglePress()
+	{
+		loadTutorial = !loadTutorial;
+		Debug.Log (loadTutorial.ToString ());
+	}
 }

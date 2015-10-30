@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class movesText : MonoBehaviour {
 
 	public bool active = true;
+
+	public string phrase;
 	
 	// Use this for initialization
 	void Start()
@@ -19,7 +21,7 @@ public class movesText : MonoBehaviour {
 		
 		if (active)
 		{		
-			gt.text = "Moves Remaining";
+			gt.text = phrase;
 		} 
 		else 
 		{

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Card : MonoBehaviour {
 
     public Vector3 stats;
@@ -30,6 +31,18 @@ public class Card : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		SpriteRenderer temp = GetComponent<SpriteRenderer>();
+
+		if (this.attacked)
+		{
+			temp.color = new Color(.3f, .3f, .3f, 1);
+		} 
+		else 
+		{
+			temp.color = new Color(1, 1, 1, 1);
+		}
+
         if (!this.flipped && !dead)
         {
             this.GetComponent<SpriteRenderer>().sprite = this.sprite;

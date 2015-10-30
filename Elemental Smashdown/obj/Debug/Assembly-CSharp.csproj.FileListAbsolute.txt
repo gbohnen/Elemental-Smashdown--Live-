@@ -1,0 +1,3 @@
+C:\Users\Gray\Documents\GitHub\Elemental-Smashdown--Live-\Elemental Smashdown\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Gray\Documents\GitHub\Elemental-Smashdown--Live-\Elemental Smashdown\obj\Debug\Assembly-CSharp.dll
+C:\Users\Gray\Documents\GitHub\Elemental-Smashdown--Live-\Elemental Smashdown\obj\Debug\Assembly-CSharp.pdb
