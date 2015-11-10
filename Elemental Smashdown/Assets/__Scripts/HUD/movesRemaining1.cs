@@ -19,12 +19,12 @@ public class movesRemaining1 : MonoBehaviour {
 		if (active)
 		{
 			Image image = GetComponent<Image>();
-			image.sprite = sprite;
+			image.color = new Color(1, 1, 1, 1);
 		} 
 		else 
 		{
 			Image image = GetComponent<Image>();
-			image.sprite = null;
+			image.color = new Color(0, 0 ,0 ,0);
 		}
 		
 		if (Input.GetKeyDown (KeyCode.I)) 

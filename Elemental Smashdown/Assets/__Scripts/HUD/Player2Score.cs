@@ -4,33 +4,32 @@ using UnityEngine.UI;
 
 public class Player2Score : MonoBehaviour {
 
-    public static int player2score = 0;
-
+	public static int player2score = 0;
+	
 	public bool active = true;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-		Text gt = this.GetComponent<Text> ();
+	
+	Image image;
+	
+	// Use this for initialization
+	void Awake () {
+		image = GetComponent<Image> ();
+	}
+	
+	// Update is called once per frame
+	void Update () {
 		
 		if (active)
-		{		
-			gt.text = "Player 2 Score: " + player2score.ToString ();
+		{
+			image.fillAmount = player2score * .05f;
 		} 
 		else 
 		{
-			gt.text = null;
+			image.fillAmount = 0;
 		}
 		
 		if (Input.GetKeyDown (KeyCode.I)) 
 		{
 			active = !active;
 		}
-    }
+	}
 }

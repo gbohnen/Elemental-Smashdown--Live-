@@ -8,23 +8,23 @@ public class Player1Score : MonoBehaviour {
 
 	public bool active = true;
 
+	Image image;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		image = GetComponent<Image> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		Text gt = this.GetComponent<Text> ();
-
 		if (active)
 		{
-			gt.text = "Player 1 Score: " + player1score.ToString ();
+			image.fillAmount = player1score * .05f;
 		} 
 		else 
 		{
-			gt.text = null;
+			image.fillAmount = 0;
 		}
 
 		if (Input.GetKeyDown (KeyCode.I)) 

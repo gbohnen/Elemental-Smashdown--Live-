@@ -66,17 +66,17 @@ public class PlayerController : MonoBehaviour
 
     void Draw()
     {
-        player1Hand[0].transform.position = new Vector3(-8, 5, 0);
-        player1Hand[1].transform.position = new Vector3(-4, 5, 0);
-        player1Hand[2].transform.position = new Vector3(0, 5, 0);
-        player1Hand[3].transform.position = new Vector3(4, 5, 0);
-        player1Hand[4].transform.position = new Vector3(8, 5, 0);
+        player1Hand[0].transform.position = new Vector3(-5, 5, 0);
+        player1Hand[1].transform.position = new Vector3(-1, 5, 0);
+        player1Hand[2].transform.position = new Vector3(3, 5, 0);
+        player1Hand[3].transform.position = new Vector3(7, 5, 0);
+        player1Hand[4].transform.position = new Vector3(11, 5, 0);
 
-        player2Hand[0].transform.position = new Vector3(-8, -5, 0);
-        player2Hand[1].transform.position = new Vector3(-4, -5, 0);
-        player2Hand[2].transform.position = new Vector3(0, -5, 0);
-        player2Hand[3].transform.position = new Vector3(4, -5, 0);
-        player2Hand[4].transform.position = new Vector3(8, -5, 0);
+        player2Hand[0].transform.position = new Vector3(-5, -5, 0);
+        player2Hand[1].transform.position = new Vector3(-1, -5, 0);
+        player2Hand[2].transform.position = new Vector3(3, -5, 0);
+        player2Hand[3].transform.position = new Vector3(7, -5, 0);
+        player2Hand[4].transform.position = new Vector3(11, -5, 0);
     }
 
     void RotateCards()
@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour
 				Destroy(player1Hand[i].gameObject);
                 player1Hand[i] = deck.GetNextCard();
 				player1Hand[i].flipped = true;
-                StartCoroutine(ChangePosition(player1Hand[i], .5f, new Vector3(4 * i - 8, 5, 0)));
+                StartCoroutine(ChangePosition(player1Hand[i], .5f, new Vector3(4 * i - 5, 5, 0)));
 				StartCoroutine(FlipCard(player1Hand[i], .5f));
                 //player1Hand[i].flipped = false;
                 player1Hand[i].selected = false;
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
 				Destroy(player2Hand[i].gameObject);
                 player2Hand[i] = deck.GetNextCard();
 				player2Hand[i].flipped = true;
-                StartCoroutine(ChangePosition(player2Hand[i], .5f, new Vector3(4 * i - 8, -5, 0)));
+                StartCoroutine(ChangePosition(player2Hand[i], .5f, new Vector3(4 * i - 5, -5, 0)));
 				StartCoroutine(FlipCard(player2Hand[i], .5f));
                 //player2Hand[i].flipped = false;
                 player2Hand[i].selected = false;
@@ -424,9 +424,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 100, 120, 30), "Save Game"))
-        {
-            SaveData data = new SaveData(whichTurn, player1card, player2card, player1selected, player2selected, player1Hand, player2Hand);
+        //if (GUI.Button(new Rect(10, 100, 120, 30), "Save Game"))
+        //{
+        //    SaveData data = new SaveData(whichTurn, player1card, player2card, player1selected, player2selected, player1Hand, player2Hand);
 
             //data.whichTurn = whichTurn;
             //data.player1card = player1card;
@@ -436,12 +436,12 @@ public class PlayerController : MonoBehaviour
             //data.player1Hand = player1Hand;
             //data.player2Hand = player2Hand;
 
-            SaveLoad.Save();
-        }
-        if (GUI.Button(new Rect(10, 140, 120, 30), "Load Last Game"))
-        {
-            SaveLoad.Load();
-        }
+        //    SaveLoad.Save();
+        //}
+        //if (GUI.Button(new Rect(10, 140, 120, 30), "Load Last Game"))
+        //{
+        //    SaveLoad.Load();
+        //}
     }
 
 	public void CombatAnimation(Card player1, Card player2)

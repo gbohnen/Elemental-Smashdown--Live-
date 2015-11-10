@@ -137,7 +137,7 @@ public class Deck : MonoBehaviour {
             temp.GetComponent<Card>().back = cardBack;
 
             // position card
-            temp.transform.position = new Vector3((float)-4.7, 0, 0);
+			temp.transform.position = new Vector3((float)5.4, 0, 0);
             temp.transform.Rotate(new Vector3(0, 0, -90));
             temp.transform.localScale += new Vector3(.25f, .25f, 0);
 
@@ -156,7 +156,7 @@ public class Deck : MonoBehaviour {
             temp.GetComponent<Card>().back = cardBack;
 
             // position card
-            temp.transform.position = new Vector3((float)-4.7, 0, 0);
+            temp.transform.position = new Vector3((float)5.4, 0, 0);
             temp.transform.Rotate(new Vector3(0, 0, -90));
             temp.transform.localScale += new Vector3(.25f, .25f, 0);
 
@@ -175,7 +175,7 @@ public class Deck : MonoBehaviour {
             temp.GetComponent<Card>().back = cardBack;
 
             // position card
-            temp.transform.position = new Vector3((float)-4.7, 0, 0);
+			temp.transform.position = new Vector3((float)5.4, 0, 0);
             temp.transform.Rotate(new Vector3(0, 0, -90));
             temp.transform.localScale += new Vector3(.25f, .25f, 0);
 
