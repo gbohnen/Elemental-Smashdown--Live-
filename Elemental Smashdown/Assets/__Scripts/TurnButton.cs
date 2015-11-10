@@ -4,33 +4,35 @@ using System.Collections;
 public class TurnButton : MonoBehaviour {
 
     public GameObject light;
+    public GameObject indicator;
 
 	public bool active = true;
 
 	public Sprite sprite;
 
+    Vector3 lightpos1 = new Vector3(3, 10, -7);
+    Vector3 lightpos2 = new Vector3(3, -10, -7);
+    Vector3 quadpos1 = new Vector3(3, 5, 0);
+    Vector3 quadpos2 = new Vector3(3, -5, 0);
+
 	// Use this for initialization
 	void Start () {
         OnMouseDown();
-		sprite = GetComponent<SpriteRenderer> ().sprite;
-	}
+    }
 
     void Awake()
     {
         light = GameObject.Find("PlayerLight");
+        indicator = GameObject.Find("PlayerIndicator");
     }
 	
 	// Update is called once per frame
 	void Update () {
 		if (active)
 		{
-			SpriteRenderer spriteRend = this.GetComponent<SpriteRenderer>();
-			spriteRend.sprite = this.sprite;
 		}
 		else
 		{
-			SpriteRenderer spriteRend = this.GetComponent<SpriteRenderer>();
-			spriteRend.sprite = null;
 		}
 		
 		if (Input.GetKeyDown(KeyCode.I))
@@ -41,30 +43,20 @@ public class TurnButton : MonoBehaviour {
 
     public void OnMouseDown()
     {
-        StartCoroutine(BounceButton(this.gameObject, .1f));
 
         // switch players
         if (PlayerController.whichTurn == PlayerTurn.Player1)
         {
-            Vector3 pos = light.transform.position;
-            pos.y = -10;
-            light.transform.position = pos;
 
-            pos = GameObject.FindGameObjectWithTag("Indic").GetComponent<SpriteRenderer>().transform.position;
-            pos.y = -5;
-            GameObject.FindGameObjectWithTag("Indic").GetComponent<SpriteRenderer>().transform.position = pos;
+            StartCoroutine(ChangePosition(light, .3f, lightpos2));
+            StartCoroutine(ChangePosition(indicator, .3f, quadpos2));
 
             PlayerController.whichTurn = PlayerTurn.Player2;
         }
         else
         {
-            Vector3 pos = light.transform.position;
-            pos.y = 10;
-            light.transform.position = pos;
-
-            pos = GameObject.FindGameObjectWithTag("Indic").GetComponent<SpriteRenderer>().transform.position;
-            pos.y = 5;
-            GameObject.FindGameObjectWithTag("Indic").GetComponent<SpriteRenderer>().transform.position = pos;
+            StartCoroutine(ChangePosition(light, .3f, lightpos1));
+            StartCoroutine(ChangePosition(indicator, .3f, quadpos1));
 
             PlayerController.whichTurn = PlayerTurn.Player1;
         }
@@ -82,11 +74,10 @@ public class TurnButton : MonoBehaviour {
         SoundManager.instance.PlaySound("endTurn", 1f);
     }
 
-    IEnumerator BounceButton(GameObject temp, float time)
+    IEnumerator ChangePosition(GameObject temp, float time, Vector3 destination)
     {
         // set the current size and target size
-        Vector3 originalScale = temp.transform.localScale;
-        Vector3 destinationScale = temp.transform.localScale -= new Vector3(0.40f, 0.40f, 0f);
+        Vector3 originalPosition = temp.transform.position;
 
         // zero the time
         float currentTime = 0.0f;
@@ -94,24 +85,11 @@ public class TurnButton : MonoBehaviour {
         do
         {
             // scale up and increase time each frame
-            temp.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / time);
+            temp.transform.position = Vector3.Lerp(originalPosition, destination, currentTime / time);
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= time);
 
-        // set the current size and target size
-        originalScale = temp.transform.localScale;
-        destinationScale = temp.transform.localScale += new Vector3(0.40f, 0.40f, 0f);
-
-        // zero the time
-        currentTime = 0.0f;
-
-        do
-        {
-            // scale up and increase time each frame
-            temp.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / time);
-            currentTime += Time.deltaTime;
-            yield return null;
-        } while (currentTime <= time);
+        temp.transform.position = destination;
     }
 }

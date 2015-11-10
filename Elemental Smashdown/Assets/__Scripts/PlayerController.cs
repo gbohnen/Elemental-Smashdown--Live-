@@ -360,21 +360,26 @@ public class PlayerController : MonoBehaviour
     {
         int butt = (int)Random.Range(1, 4);
 
+        GameObject wheel = GameObject.FindGameObjectWithTag("Wheel");
+
         // randomize playfield
         if (butt == 1)
         {
             Background.currentType = BackgroundType.Fire;
-            QuadBackground.currentType = BackgroundType.Fire;
+            QuadBackground.currentType = BackgroundType.Fire; 
+            StartCoroutine(ChangeRotation(wheel, new Vector3(0, 0, 120), .8f));
         }
         else if (butt == 2)
         {
             Background.currentType = BackgroundType.Grass;
             QuadBackground.currentType = BackgroundType.Grass;
+            StartCoroutine(ChangeRotation(wheel, new Vector3(0, 0, -120), .8f));
         }
         else if (butt == 3)
         {
             Background.currentType = BackgroundType.Water;
             QuadBackground.currentType = BackgroundType.Water;
+            StartCoroutine(ChangeRotation(wheel, new Vector3(0, 0, 0), .8f));
         }
     }
 
@@ -420,6 +425,25 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.instance.PlaySound("badAttack", 1f);
         }
+    }
+
+    IEnumerator ChangeRotation(GameObject temp, Vector3 target, float time)
+    {
+        // set the current size and target size
+        Vector3 originalRotation = temp.transform.eulerAngles;
+
+        // zero the time
+        float currentTime = 0.0f;
+
+        do
+        {
+            // scale up and increase time each frame
+            temp.transform.eulerAngles = Vector3.Lerp(originalRotation, target, currentTime / time);
+            currentTime += Time.deltaTime;
+            yield return null;
+        } while (currentTime <= time);
+
+        temp.transform.eulerAngles = target;
     }
 
     public void OnGUI()

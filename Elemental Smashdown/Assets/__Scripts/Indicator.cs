@@ -18,21 +18,21 @@ public class Indicator : MonoBehaviour {
     void Update()
     {
 
-        if (currentType == BackgroundType.Fire)
-        {
-            SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
-            sprite.sprite = fire;
-        }
-        else if (currentType == BackgroundType.Grass)
-        {
-            SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
-            sprite.sprite = grass;
-        }
-        else
-        {
-            SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
-            sprite.sprite = water;
-        }
+        //if (currentType == BackgroundType.Fire)
+        //{
+        //    SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
+        //    sprite.sprite = fire;
+        //}
+        //else if (currentType == BackgroundType.Grass)
+        //{
+        //    SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
+        //    sprite.sprite = grass;
+        //}
+        //else
+        //{
+        //    SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
+        //    sprite.sprite = water;
+        //}
 
     }
 }
