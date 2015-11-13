@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
-[System.Serializable]
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField]
     public static PlayerTurn whichTurn = PlayerTurn.Player1;
-    [SerializeField]
     public Card player1card;
-    [SerializeField]
     public Card player2card;
-    [SerializeField]
     public bool player1selected = false;
-    [SerializeField]
     public bool player2selected = false;
-    [SerializeField]
     public Card[] player1Hand;
-    [SerializeField]
     public Card[] player2Hand;
+
+	public Transform cardReferenceTransform;
+
+	// helpful hints controllers
+	int tiesTally = 0;
+	int badAttackTally = 0;
+	float timeSinceAction = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +43,20 @@ public class PlayerController : MonoBehaviour
         RotateCards();
         ChangeBackground();
         ChangeBackground();
+
+		Player1Score.player1score = 0;
+		Player2Score.player2score = 0;
+
+		NotificationList.instance.AddItem("Press Esc at any time to view the Help Menu.");
+
+        string text;
+        if (QuadBackground.currentType == BackgroundType.Fire)
+            text = "Kill them with FIRE!";
+        else if (QuadBackground.currentType == BackgroundType.Grass)
+            text = "Use your GRASS powers to fight!";
+        else
+            text = "WATER you doing? Go fight!";
+        NotificationList.instance.AddItem(PlayerController.whichTurn.ToString() + " is up. " + text);
 	}
 	
 	// Update is called once per frame
@@ -62,6 +74,14 @@ public class PlayerController : MonoBehaviour
             SoundManager.instance.PlaySound("win", 1f);
             Application.LoadLevel("Player2Win");
         }
+
+		timeSinceAction += Time.deltaTime;
+
+		if (timeSinceAction > 30) 
+		{
+			NotificationList.instance.AddItem("Press Esc at any time to view the Help Menu.");
+			timeSinceAction = 0;
+		}
 	}
 
     void Draw()
@@ -90,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     public void SelectCard(Card temp)
     {
-
+		timeSinceAction = 0;
 
         // select cards logic
         if (temp.belongsTo == PlayerTurn.Player1 && player1selected == false && temp.selected == false && temp.attacked == false && !temp.flipped)
@@ -140,7 +160,7 @@ public class PlayerController : MonoBehaviour
 	IEnumerator ScaleUpOverTime(Card temp, float time)
 	{
 		// set the current size and target size
-		Vector3 originalScale = new Vector3(1.275017f, 1.275017f, 1);
+		Vector3 originalScale = cardReferenceTransform.localScale;
 		Vector3 destinationScale = new Vector3 (1.638793f, 1.638793f, 1);
 		
 		// zero the time
@@ -153,6 +173,8 @@ public class PlayerController : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
+		temp.transform.localScale = destinationScale;
+
 		CheckBothSelected ();
 	}
 
@@ -166,7 +188,7 @@ public class PlayerController : MonoBehaviour
 	{
 		// set the current size and target size
 		Vector3 originalScale = new Vector3 (1.638793f, 1.638793f, 1);
-		Vector3 destinationScale = new Vector3(1.275017f, 1.275017f, 1);
+		Vector3 destinationScale = cardReferenceTransform.localScale;
 		
 		// zero the time
 		float currentTime = 0.0f;
@@ -178,13 +200,15 @@ public class PlayerController : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
+
+		temp.transform.localScale = destinationScale;
 	}
 
 	IEnumerator FlipCard(Card temp, float time)
 	{
 		// set the current size and target size
-		Vector3 originalScale = new Vector3 (1.275017f, 1.275017f, 1);
-		Vector3 destinationScale = new Vector3(0, 1.275017f, 1);
+		Vector3 originalScale = cardReferenceTransform.localScale;
+		Vector3 destinationScale = new Vector3(0, cardReferenceTransform.localScale.y, 1);
 		
 		// zero the time
 		float currentTime = 0.0f;
@@ -209,7 +233,8 @@ public class PlayerController : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
-		
+
+		temp.transform.localScale = originalScale;
 	}
 
 	IEnumerator MoveTo(Card temp, Vector3 target, float time)
@@ -227,6 +252,59 @@ public class PlayerController : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return new WaitForSeconds(1);
 		} while (currentTime <= time);
+
+		temp.transform.position = target;
+	}
+
+	void Player1Win(Card player1, Card player2)
+	{
+		player2card.dead = true;
+		Player1Score.player1score++;
+		NotificationList.instance.AddItem("Player 1's " + player1card.name.ToString() + " wins!");
+		FightSound(PlayerTurn.Player1);
+		tiesTally = 0;
+		if (whichTurn == PlayerTurn.Player2)
+		{
+			badAttackTally++;
+			if (badAttackTally >= 3)
+			{
+				NotificationList.instance.AddItem("Consider your attacks carefully before choosing.");
+				badAttackTally = 0;
+			}
+		}
+	}
+
+	void Player2Win(Card player1, Card player2)
+	{
+		player1card.dead = true;
+		Player2Score.player2score++;
+		NotificationList.instance.AddItem("Player 2's " + player2card.name.ToString() + " wins!");
+		FightSound(PlayerTurn.Player2);
+		tiesTally = 0;
+		if (whichTurn == PlayerTurn.Player1)
+		{
+			badAttackTally++;
+			if (badAttackTally >= 3)
+			{
+				NotificationList.instance.AddItem("Consider your attacks carefully before choosing.");
+				badAttackTally = 0;
+			}
+		}
+	}
+
+	void Tie(Card player1, Card player2)
+	{
+		player2card.dead = true;
+		Player1Score.player1score++;
+		player1card.dead = true;
+		Player2Score.player2score++;
+		NotificationList.instance.AddItem("It's a tie...");
+		tiesTally++;
+		if (tiesTally >= 3)
+		{
+			NotificationList.instance.AddItem("Try to minimize your ties so you don't");
+			NotificationList.instance.AddItem ("help your enemy!");
+		}
 	}
 
     public void Fight(Card player1, Card player2)
@@ -236,22 +314,15 @@ public class PlayerController : MonoBehaviour
         {
             if (player1card.stats.x > player2card.stats.x)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                FightSound(PlayerTurn.Player1);
+				Player1Win(player1, player2);
             }
             else if (player1card.stats.x < player2card.stats.x)
             {
-                player1card.dead = true;
-                Player2Score.player2score++;
-                FightSound(PlayerTurn.Player2);
+				Player2Win(player1, player2);
             }
             else if (player1card.stats.x == player2card.stats.x)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                player1card.dead = true;
-                Player2Score.player2score++;
+				Tie (player1, player2);
             }
         }
         // fight in grass
@@ -259,22 +330,15 @@ public class PlayerController : MonoBehaviour
         {
             if (player1card.stats.y > player2card.stats.y)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                FightSound(PlayerTurn.Player1);
+				Player1Win(player1, player2);
             }
             else if (player1card.stats.y < player2card.stats.y)
             {
-                player1card.dead = true;
-                Player2Score.player2score++;
-                FightSound(PlayerTurn.Player2);
+				Player2Win(player1, player2);
             }
             else if (player1card.stats.y == player2card.stats.y)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                player1card.dead = true;
-                Player2Score.player2score++;
+				Tie (player1, player2);
             }
         }
         // fight in water
@@ -282,22 +346,15 @@ public class PlayerController : MonoBehaviour
         {
             if (player1card.stats.z > player2card.stats.z)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                FightSound(PlayerTurn.Player1);
+				Player1Win(player1, player2);
             }
             else if (player1card.stats.z < player2card.stats.z)
             {
-                player1card.dead = true;
-                Player2Score.player2score++;
-                FightSound(PlayerTurn.Player2);
+				Player2Win(player1, player2);
             }
             else if (player1card.stats.z == player2card.stats.z)
             {
-                player2card.dead = true;
-                Player1Score.player1score++;
-                player1card.dead = true;
-                Player2Score.player2score++;
+				Tie (player1, player2);
             }
         }
 		MovesRemaining.movesLeft--;
@@ -354,6 +411,8 @@ public class PlayerController : MonoBehaviour
         player2selected = false;
 
 		MovesRemaining.movesLeft = 5;
+
+		timeSinceAction = 0;
     }
 
     public void ChangeBackground()
@@ -413,6 +472,8 @@ public class PlayerController : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= time);
+
+		temp.transform.position = destination;
     }
 
     public void FightSound(PlayerTurn player)
@@ -468,12 +529,6 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-	public void CombatAnimation(Card player1, Card player2)
-	{
-		StartCoroutine(MoveTo(player1, new Vector3 (0, 0, 0), 1f));
-		StartCoroutine(MoveTo(player2, new Vector3 (0, 0, 0), 1f));
-	}
-
 	public void CheckBothSelected()
 	{
 		// call the fight method
@@ -485,8 +540,8 @@ public class PlayerController : MonoBehaviour
 			player2card.attacked = true;
 			
 			// reset cards
-			player1card.transform.localScale -= new Vector3 ((float)0.40, (float)0.40, 0);
-			player2card.transform.localScale -= new Vector3 ((float)0.40, (float)0.40, 0);
+		StartCoroutine(ScaleDownOverTime(player1card, .2f));
+			player2card.transform.localScale = cardReferenceTransform.localScale;
 			player1card.selected = false;
 			player2card.selected = false;
 			player1selected = false;
@@ -494,6 +549,11 @@ public class PlayerController : MonoBehaviour
 			player1card = null;
 			player2card = null;
 		}
+
+	}
+
+	public void CheckOptimalAttack()
+	{
 
 	}
 //    public void Deserialize(MyData data)

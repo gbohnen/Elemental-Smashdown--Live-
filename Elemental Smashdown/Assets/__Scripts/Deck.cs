@@ -125,62 +125,27 @@ public class Deck : MonoBehaviour {
         
 
         // add the cards
-        for (int i = 0; i < 20; i++)
-        {
-            GameObject temp = Instantiate(prefabCard);          
+		for (int j = 0; j < 3; j++) 
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				GameObject temp = Instantiate (prefabCard);          
             
-            // build card
-            temp.GetComponent<Card>().stats = cardStats[i];
-            temp.GetComponent<Card>().sprite = cardSprites[i];
-            temp.GetComponent<Card>().name = cardNames[i];
-            temp.GetComponent<Card>().flipped = true;
-            temp.GetComponent<Card>().back = cardBack;
+				// build card
+				temp.GetComponent<Card> ().stats = cardStats [i];
+				temp.GetComponent<Card> ().sprite = cardSprites [i];
+				temp.GetComponent<Card> ().name = cardNames [i];
+				temp.GetComponent<Card> ().flipped = true;
+				temp.GetComponent<Card> ().back = cardBack;
 
-            // position card
-			temp.transform.position = new Vector3((float)5.4, 0, 0);
-            temp.transform.Rotate(new Vector3(0, 0, -90));
-            temp.transform.localScale += new Vector3(.25f, .25f, 0);
+				// position card
+				temp.transform.position = deckAnchor.position;
+				temp.transform.rotation = deckAnchor.rotation;
+				temp.transform.localScale = deckAnchor.localScale;
 
-            cards.Add(temp.GetComponent<Card>());
-        }
-        // add the cards
-        for (int i = 0; i < 20; i++)
-        {
-            GameObject temp = Instantiate(prefabCard);
-
-            // build card
-            temp.GetComponent<Card>().stats = cardStats[i];
-            temp.GetComponent<Card>().sprite = cardSprites[i];
-            temp.GetComponent<Card>().name = cardNames[i];
-            temp.GetComponent<Card>().flipped = true;
-            temp.GetComponent<Card>().back = cardBack;
-
-            // position card
-            temp.transform.position = new Vector3((float)5.4, 0, 0);
-            temp.transform.Rotate(new Vector3(0, 0, -90));
-            temp.transform.localScale += new Vector3(.25f, .25f, 0);
-
-            cards.Add(temp.GetComponent<Card>());
-        }
-        // add the cards
-        for (int i = 0; i < 20; i++)
-        {
-            GameObject temp = Instantiate(prefabCard);
-
-            // build card
-            temp.GetComponent<Card>().stats = cardStats[i];
-            temp.GetComponent<Card>().sprite = cardSprites[i];
-            temp.GetComponent<Card>().name = cardNames[i];
-            temp.GetComponent<Card>().flipped = true;
-            temp.GetComponent<Card>().back = cardBack;
-
-            // position card
-			temp.transform.position = new Vector3((float)5.4, 0, 0);
-            temp.transform.Rotate(new Vector3(0, 0, -90));
-            temp.transform.localScale += new Vector3(.25f, .25f, 0);
-
-            cards.Add(temp.GetComponent<Card>());
-        }
+				cards.Add (temp.GetComponent<Card> ());
+			}
+		}
 
         ShuffleDeck();
 

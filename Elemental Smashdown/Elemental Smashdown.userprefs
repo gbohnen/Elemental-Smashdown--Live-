@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\CardRotating.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\__Scripts\CardRotating.cs" Line="78" Column="4" />
-      <File FileName="Assets\__Scripts\HUD\movesRemaining1.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\Card.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\__Scripts\Deck.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\Menus\Menus.cs" Line="27" Column="30" />
+      <File FileName="Assets\__Scripts\MenuTips.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\TurnButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\Menus\PauseMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\PlayerController.cs" Line="285" Column="4" />
+      <File FileName="Assets\__Scripts\Indicator.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\ActiveIndicator.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\HUD\currentAttack.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

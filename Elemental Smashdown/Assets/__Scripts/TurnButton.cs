@@ -17,7 +17,7 @@ public class TurnButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        OnMouseDown();
+
     }
 
     void Awake()
@@ -72,6 +72,8 @@ public class TurnButton : MonoBehaviour {
 
         // play end of turn sound
         SoundManager.instance.PlaySound("endTurn", 1f);
+
+        CallPlayer();
     }
 
     IEnumerator ChangePosition(GameObject temp, float time, Vector3 destination)
@@ -91,5 +93,17 @@ public class TurnButton : MonoBehaviour {
         } while (currentTime <= time);
 
         temp.transform.position = destination;
+    }
+
+    static void CallPlayer()
+    {
+        string text;
+        if (QuadBackground.currentType == BackgroundType.Fire)
+            text = "Kill them with FIRE!";
+        else if (QuadBackground.currentType == BackgroundType.Grass)
+            text = "Use your GRASS powers to fight!";
+        else
+            text = "WATER you doing? Go fight!";
+        NotificationList.instance.AddItem(PlayerController.whichTurn.ToString() + " is up. " + text);
     }
 }

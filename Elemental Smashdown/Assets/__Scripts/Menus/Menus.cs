@@ -16,6 +16,16 @@ public class Menus : MonoBehaviour
     {
 
     }
+	public void MainMenu()
+	{
+		SoundManager.instance.PlaySound("click", 1f);
+		Application.LoadLevel("Main menu");
+	}
+	public void PlayAgain()
+	{
+		SoundManager.instance.PlaySound("click", 1f);
+		Application.LoadLevel("play");
+	}
     public void StartButtonPressed()
     {
         SoundManager.instance.PlaySound("click", 1f);

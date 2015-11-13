@@ -38,10 +38,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -59,10 +59,13 @@
      <Compile Include="Assets\__Scripts\HUD\movesRemaining1.cs" />
      <Compile Include="Assets\__Scripts\HUD\movesText.cs" />
      <Compile Include="Assets\__Scripts\Indicator.cs" />
+     <Compile Include="Assets\__Scripts\MenuTips.cs" />
      <Compile Include="Assets\__Scripts\Menus\HelpMenu.cs" />
      <Compile Include="Assets\__Scripts\Menus\Menus.cs" />
+     <Compile Include="Assets\__Scripts\Menus\PauseMenu.cs" />
      <Compile Include="Assets\__Scripts\Menus\TutorialMenus.cs" />
      <Compile Include="Assets\__Scripts\MonoPlayer.cs" />
+     <Compile Include="Assets\__Scripts\NotificationList.cs" />
      <Compile Include="Assets\__Scripts\PageCount.cs" />
      <Compile Include="Assets\__Scripts\PlayerController.cs" />
      <Compile Include="Assets\__Scripts\PlayerIndicator.cs" />
@@ -76,16 +79,16 @@
      <Compile Include="Assets\__Scripts\TutorialButtons.cs" />
      <Compile Include="Assets\__Scripts\TutorialText.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
- <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ <HintPath>E:/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
