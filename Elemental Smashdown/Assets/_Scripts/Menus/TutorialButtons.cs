@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class TutorialButtons : MonoBehaviour {
 
 	public static bool isComplete = false;
-	public static int pageCount = 9;
+	public static int pageCount = 6;
 	public static int currentPage = 1;
 
 	public void Update()

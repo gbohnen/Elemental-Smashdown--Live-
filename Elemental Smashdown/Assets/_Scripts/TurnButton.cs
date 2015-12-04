@@ -5,6 +5,8 @@ public class TurnButton : MonoBehaviour {
 
     public GameObject playerLight;
     public GameObject indicator;
+	public GameObject player1tag;
+	public GameObject player2tag;
 
 	public bool active = true;
 
@@ -22,8 +24,6 @@ public class TurnButton : MonoBehaviour {
 
     void Awake()
     {
-		playerLight = GameObject.Find("PlayerLight");
-        indicator = GameObject.Find("PlayerIndicator");
     }
 	
 	// Update is called once per frame
@@ -48,15 +48,15 @@ public class TurnButton : MonoBehaviour {
         if (PlayerController.whichTurn == PlayerTurn.Player1)
         {
 
-			StartCoroutine(ChangePosition(playerLight, .3f, lightpos2));
-            StartCoroutine(ChangePosition(indicator, .3f, quadpos2));
+			StartCoroutine(ChangePosition(playerLight, .8f, lightpos2));
+            StartCoroutine(ChangePosition(indicator, .8f, quadpos2));
 
             PlayerController.whichTurn = PlayerTurn.Player2;
         }
         else
         {
-			StartCoroutine(ChangePosition(playerLight, .3f, lightpos1));
-            StartCoroutine(ChangePosition(indicator, .3f, quadpos1));
+			StartCoroutine(ChangePosition(playerLight, .8f, lightpos1));
+            StartCoroutine(ChangePosition(indicator, .8f, quadpos1));
 
             PlayerController.whichTurn = PlayerTurn.Player1;
         }

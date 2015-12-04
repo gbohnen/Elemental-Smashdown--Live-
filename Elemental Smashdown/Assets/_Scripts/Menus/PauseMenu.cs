@@ -17,14 +17,13 @@ public class PauseMenu : MonoBehaviour {
 	void Update()
 	{		
 		if (Input.GetKeyDown (KeyCode.Escape) && !isPaused) {
-			//ameObject.GetComponent<CanvasGroup>().interactable = true;
+			gameObject.GetComponent<CanvasGroup>().interactable = true;
 			gameObject.GetComponent<CanvasGroup>().alpha = 1f;
 			isPaused = true;
-			//Time.timeScale = 0;
 		} 
 		else if (Input.GetKeyDown (KeyCode.Escape) && isPaused) 
 		{
-			//gameObject.GetComponent<CanvasGroup>().interactable = false;
+			gameObject.GetComponent<CanvasGroup>().interactable = false;
 			gameObject.GetComponent<CanvasGroup>().alpha = 0f;
 			isPaused = false;
 			//Time.timeScale = 1;

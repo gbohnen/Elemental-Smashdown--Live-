@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Card[] player2Hand;
 
     public Transform cardReferenceTransform;
+	public GameObject particlePrefab;
 
     // helpful hints controllers
     int tiesTally = 0;
@@ -56,14 +57,21 @@ public class PlayerController : MonoBehaviour
 
         NotificationList.instance.AddItem("Press Esc at any time to view the Help Menu.");
 
-        string text;
-        if (QuadBackground.currentType == BackgroundType.Fire)
-            text = "Kill them with FIRE!";
-        else if (QuadBackground.currentType == BackgroundType.Grass)
-            text = "Use your GRASS powers to fight!";
-        else
-            text = "WATER you doing? Go fight!";
-        NotificationList.instance.AddItem(PlayerController.whichTurn.ToString() + " is up. " + text);
+		// pick a random player to start
+		int random = (int)Random.Range (0, 2);
+		GameObject button = GameObject.FindGameObjectWithTag ("TurnButton");
+		switch (random) {
+		case 0:
+			whichTurn = PlayerTurn.Player2;
+			button.GetComponent<TurnButton>().OnMouseDown();
+			break;
+		case 1:
+			whichTurn = PlayerTurn.Player1;
+			button.GetComponent<TurnButton>().OnMouseDown();
+			break;
+		default:
+			break;
+		}
     }
 
     // Update is called once per frame
@@ -268,7 +276,7 @@ public class PlayerController : MonoBehaviour
     {
         player2card.dead = true;
         Player1Score.player1score++;
-        NotificationList.instance.AddItem("Player 1's " + player1card.name.ToString() + " wins!");
+        NotificationList.instance.AddItem("Player 1's " + player1card.cardName.ToString() + " wins!");
         FightSound(PlayerTurn.Player1);
         tiesTally = 0;
         if (whichTurn == PlayerTurn.Player2)
@@ -286,7 +294,7 @@ public class PlayerController : MonoBehaviour
     {
         player1card.dead = true;
         Player2Score.player2score++;
-        NotificationList.instance.AddItem("Player 2's " + player2card.name.ToString() + " wins!");
+		NotificationList.instance.AddItem("Player 2's " + player2card.cardName.ToString() + " wins!");
         FightSound(PlayerTurn.Player2);
         tiesTally = 0;
         if (whichTurn == PlayerTurn.Player1)
@@ -294,7 +302,7 @@ public class PlayerController : MonoBehaviour
             badAttackTally++;
             if (badAttackTally >= 3)
             {
-                NotificationList.instance.AddItem("Consider your attacks carefully before choosing.");
+                NotificationList.instance.AddItem("Consider your attacks carefully...");
                 badAttackTally = 0;
             }
         }
@@ -323,10 +331,14 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.x > player2card.stats.x)
             {
                 Player1Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.red;
             }
             else if (player1card.stats.x < player2card.stats.x)
             {
                 Player2Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.red;
             }
             else if (player1card.stats.x == player2card.stats.x)
             {
@@ -339,10 +351,14 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.y > player2card.stats.y)
             {
                 Player1Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.blue;
             }
             else if (player1card.stats.y < player2card.stats.y)
             {
                 Player2Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.blue;
             }
             else if (player1card.stats.y == player2card.stats.y)
             {
@@ -355,10 +371,14 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.z > player2card.stats.z)
             {
                 Player1Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.green;
             }
             else if (player1card.stats.z < player2card.stats.z)
             {
                 Player2Win(player1, player2);
+				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
+				particle.GetComponent<ParticleSystem>().startColor = Color.green;
             }
             else if (player1card.stats.z == player2card.stats.z)
             {
@@ -428,6 +448,7 @@ public class PlayerController : MonoBehaviour
         int butt = (int)Random.Range(1, 4);
 
         GameObject wheel = GameObject.FindGameObjectWithTag("Wheel");
+		GameObject turnWheel = GameObject.FindGameObjectWithTag ("TurnWheel");
 
         // randomize playfield
         if (butt == 1)
@@ -448,6 +469,12 @@ public class PlayerController : MonoBehaviour
             QuadBackground.currentType = BackgroundType.Water;
             StartCoroutine(ChangeRotation(wheel, new Vector3(0, 0, 0), .8f));
         }
+
+		// spin the player wheel
+		if (whichTurn == PlayerTurn.Player1)
+			StartCoroutine(ChangeRotation (turnWheel, new Vector3(0, 0, 90), .8f));
+		else
+			StartCoroutine(ChangeRotation (turnWheel, new Vector3(0, 0, 270), .8f));
     }
 
     public void ResetHands()
@@ -561,67 +588,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void CheckOptimalAttack()
-    {
-
-    }
-    //    public void Deserialize(MyData data)
-    //    {
-    //        whichTurn = data.whichTurn;
-
-    //        player1card = data.player1card;
-    //        player2card = data.player2card;
-
-    //        player1selected = data.player1selected;
-    //        player2selected = data.player2selected;
-
-    //        for (int i = 0; i < 5; i++)
-    //        {
-    //            if (data.player1Hand[i] != null)
-    //            {
-    //                player1Hand[i] = data.player1Hand[i];
-    //            }
-    //            if (data.player2Hand[i] != null)
-    //            {
-    //                player2Hand[i] = data.player2Hand[i];
-    //            }
-    //        }
-    //    }
-
-    //    public MyData Serialize()
-    //    {
-    //        MyData data = new MyData();
-
-    //        data.whichTurn = whichTurn;
-
-    //        if (player1card)
-    //        {
-    //            data.player1card = player1card;
-    //        }
-    //        if (player2card)
-    //        {
-    //            data.player2card = player2card;
-    //        }
-
-    //        data.player1selected = player1selected;
-    //        data.player2selected = player2selected;
-
-    //        for (int i = 0; i < 5; i++)
-    //        {
-    //            if (player1Hand[i] != null)
-    //            {
-    //                data.player1Hand[i] = player1Hand[i];
-    //            }
-    //            if (player2Hand[i] != null)
-    //            {
-    //                data.player2Hand[i] = player2Hand[i];
-    //            }
-    //        }
-
-    //        return data;
-    //    }
-    //    void ISerializable.GetObjectData(SerializationInfo oInfo, StreamingContext oContext)
-    //    {
-
-    //    }
+	public void Mulligan()
+	{
+		// check the current player
+		//int handSize = whichTurn.
+		// add the cards back to the deck
+	}
 }
