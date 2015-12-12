@@ -7,10 +7,12 @@ public class PauseMenu : MonoBehaviour {
 
 	void Awake()
 	{
-		//gameObject.GetComponent<CanvasGroup>().interactable = false;
+		gameObject.GetComponent<CanvasGroup>().interactable = false;
 		gameObject.GetComponent<CanvasGroup>().alpha = 0f;
+		gameObject.GetComponent<CanvasGroup> ().blocksRaycasts = false;
 		isPaused = false;
-		//Time.timeScale = 1;
+
+		Time.timeScale = 1;
 	}
 
 
@@ -19,14 +21,17 @@ public class PauseMenu : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) && !isPaused) {
 			gameObject.GetComponent<CanvasGroup>().interactable = true;
 			gameObject.GetComponent<CanvasGroup>().alpha = 1f;
+			gameObject.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 			isPaused = true;
+			Time.timeScale = 0;
 		} 
 		else if (Input.GetKeyDown (KeyCode.Escape) && isPaused) 
 		{
 			gameObject.GetComponent<CanvasGroup>().interactable = false;
 			gameObject.GetComponent<CanvasGroup>().alpha = 0f;
+			gameObject.GetComponent<CanvasGroup> ().blocksRaycasts = false;
 			isPaused = false;
-			//Time.timeScale = 1;
+			Time.timeScale = 1;
 		}
 	}
 
@@ -53,6 +58,8 @@ public class PauseMenu : MonoBehaviour {
 		SoundManager.instance.PlaySound("click", 1f);
 		gameObject.GetComponent<CanvasGroup>().interactable = false;
 		gameObject.GetComponent<CanvasGroup>().alpha = 0f;
+		gameObject.GetComponent<CanvasGroup> ().blocksRaycasts = false;
 		isPaused = false;
+		Time.timeScale = 1;
 	}
 }

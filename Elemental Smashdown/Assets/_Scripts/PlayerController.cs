@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public Card[] player2Hand;
 
     public Transform cardReferenceTransform;
-	public GameObject particlePrefab;
 
     // helpful hints controllers
     int tiesTally = 0;
@@ -331,14 +330,10 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.x > player2card.stats.x)
             {
                 Player1Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.red;
             }
             else if (player1card.stats.x < player2card.stats.x)
             {
                 Player2Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.red;
             }
             else if (player1card.stats.x == player2card.stats.x)
             {
@@ -351,14 +346,10 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.y > player2card.stats.y)
             {
                 Player1Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.blue;
             }
             else if (player1card.stats.y < player2card.stats.y)
             {
                 Player2Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.blue;
             }
             else if (player1card.stats.y == player2card.stats.y)
             {
@@ -371,14 +362,10 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.z > player2card.stats.z)
             {
                 Player1Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player2card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.green;
             }
             else if (player1card.stats.z < player2card.stats.z)
             {
                 Player2Win(player1, player2);
-				GameObject particle = Instantiate(particlePrefab, player1card.transform.position, Quaternion.identity) as GameObject;
-				particle.GetComponent<ParticleSystem>().startColor = Color.green;
             }
             else if (player1card.stats.z == player2card.stats.z)
             {
