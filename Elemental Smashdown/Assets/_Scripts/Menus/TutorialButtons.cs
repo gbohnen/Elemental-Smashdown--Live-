@@ -8,6 +8,11 @@ public class TutorialButtons : MonoBehaviour {
 	public static int pageCount = 6;
 	public static int currentPage = 1;
 
+	public void Awake()
+	{
+		currentPage = 1;
+	}
+
 	public void Update()
 	{
 		Button temp = GetComponent<Button> ();
