@@ -104,6 +104,7 @@ public class TurnButton : MonoBehaviour {
             text = "Use your GRASS powers to fight!";
         else
             text = "WATER you doing? Go fight!";
+		NotificationList.instance.AddItem (" ");
         NotificationList.instance.AddItem(PlayerController.whichTurn.ToString() + " is up. " + text);
     }
 }

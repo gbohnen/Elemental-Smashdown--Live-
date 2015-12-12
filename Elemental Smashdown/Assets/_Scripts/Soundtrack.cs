@@ -16,7 +16,7 @@ public class Soundtrack : MonoBehaviour
     AudioSource source;
 
     // master volume
-    float sliderValue = 1;
+    public static float sliderValue = 1;
 
     // Used to inititalize any variables or game state before the game starts
     void Awake()
