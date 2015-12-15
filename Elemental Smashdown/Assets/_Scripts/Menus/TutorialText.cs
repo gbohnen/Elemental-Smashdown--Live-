@@ -11,24 +11,40 @@ public class TutorialText : MonoBehaviour {
 		switch (TutorialButtons.currentPage)
 		{
 		case 1:
-			text.text = "Click your own monster to select it.\n\nClick your enemy's monster to make the two fight!";
+			text.text = "Welcome to Elemental Smashdown, the exciting monster fighting game!";
 			break;
 		case 2:
-			text.text = "Whichever has the highest elemental stat wins.\n\nThe surviving monster will turn grey, which means it cannot attack again this turn.";
+			text.text = "Every turn, a random element will be chosen, and monsters will use attacks of that element.";
 			break;
-		case 3: 
-			text.text = "You get a point if you kill the enemy monster, and the first person to get to 20 wins!";
+		case 3:
+            text.text = "It's up to you to plan your turns and kill your opponent's monsters. \n\nPlay it smart, and you can get 20 points for the win!";
 			break;
 		case 4:
-			text.text = "Let's try a quick demonstration.";
+			text.text = "Click on your own monster to select it, then click on the opponent that you want to attack.";
 			break;
 		case 5:
-			text.text = "Which of the following attacks is the best choice?";
-			break;
-		case 6:
+            // demo panel: your card is better than theirs
 			text.text = "";
 			break;
-		default:
+		case 6:
+            // demo panel: their card is better than yours
+			text.text = "";
+			break;
+        case 7:
+            // demo panel: both cards tie
+            text.text = "";
+            break;
+        case 8:
+            text.text = "Let's try it out! \n\nWhich of the following is the best attack?";
+            break;
+        case 9:
+            // demo panel: pick the best choice
+            text.text = "";
+            break;
+        case 10:
+            text.text = "Nice work! Let's try it out for real.";
+            break;
+        default:
 			break;
 		}
 	}

@@ -7,14 +7,6 @@ public class TutorialPanel : MonoBehaviour {
 	public GameObject textBox;
 	public static bool isComplete = false;
 
-	void Update()
-	{
-		if (TutorialButtons.pageCount == TutorialButtons.currentPage)
-			GetComponent<CanvasGroup> ().alpha = 1;
-		else
-			GetComponent<CanvasGroup> ().alpha = 0;
-	}
-
 	public void ClickSalamander()
 	{
 		textBox.GetComponent<Text> ().text = "Fire Salamander's attack in the current element (Fire) is higher than Grandpa Tim's. Tim will die if he attacks the salamander. Try another attack.";
@@ -27,7 +19,7 @@ public class TutorialPanel : MonoBehaviour {
 
 	public void ClickCaterpillar()
 	{
-		textBox.GetComponent<Text> ().text = "Tim can handily defeat this caterpillar, at least in fire. Looks like you're ready to play! Click play to begin the game when both players are ready.";
+		textBox.GetComponent<Text> ().text = "Tim can handily defeat this caterpillar, at least in fire. Looks like you've got the basics down!";
 		isComplete = true;
 	}
 }

@@ -274,7 +274,6 @@ public class PlayerController : MonoBehaviour
     void Player1Win(Card player1, Card player2)
     {
         player2card.dead = true;
-        Player1Score.player1score++;
         NotificationList.instance.AddItem("Player 1's " + player1card.cardName.ToString() + " wins!");
         FightSound(PlayerTurn.Player1);
         tiesTally = 0;
@@ -292,7 +291,6 @@ public class PlayerController : MonoBehaviour
     void Player2Win(Card player1, Card player2)
     {
         player1card.dead = true;
-        Player2Score.player2score++;
 		NotificationList.instance.AddItem("Player 2's " + player2card.cardName.ToString() + " wins!");
         FightSound(PlayerTurn.Player2);
         tiesTally = 0;
@@ -310,9 +308,7 @@ public class PlayerController : MonoBehaviour
     void Tie(Card player1, Card player2)
     {
         player2card.dead = true;
-        Player1Score.player1score++;
         player1card.dead = true;
-        Player2Score.player2score++;
         NotificationList.instance.AddItem("It's a tie...");
         tiesTally++;
         if (tiesTally >= 3)
@@ -330,10 +326,12 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.x > player2card.stats.x)
             {
                 Player1Win(player1, player2);
+                Player1Score.player1score += (int)(player1card.stats.x - player2card.stats.x);
             }
             else if (player1card.stats.x < player2card.stats.x)
             {
                 Player2Win(player1, player2);
+                Player2Score.player2score += (int)(player2card.stats.x - player1card.stats.x);
             }
             else if (player1card.stats.x == player2card.stats.x)
             {
@@ -346,10 +344,12 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.y > player2card.stats.y)
             {
                 Player1Win(player1, player2);
+                Player1Score.player1score += (int)(player1card.stats.y - player2card.stats.y);
             }
             else if (player1card.stats.y < player2card.stats.y)
             {
                 Player2Win(player1, player2);
+                Player2Score.player2score += (int)(player2card.stats.y - player1card.stats.y);
             }
             else if (player1card.stats.y == player2card.stats.y)
             {
@@ -362,10 +362,12 @@ public class PlayerController : MonoBehaviour
             if (player1card.stats.z > player2card.stats.z)
             {
                 Player1Win(player1, player2);
+                Player1Score.player1score += (int)(player1card.stats.z - player2card.stats.z);
             }
             else if (player1card.stats.z < player2card.stats.z)
             {
                 Player2Win(player1, player2);
+                Player2Score.player2score += (int)(player2card.stats.z - player1card.stats.z);
             }
             else if (player1card.stats.z == player2card.stats.z)
             {
