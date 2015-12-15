@@ -42,7 +42,14 @@ public class TutorialText : MonoBehaviour {
             text.text = "";
             break;
         case 10:
-            text.text = "Nice work! Let's try it out for real.";
+            text.text = "Nice work! Let's check out some parts of the interface.";
+            break;
+        case 11:
+            // demo panel: show off the interface elements
+            text.text = "";
+            break;
+        case 12:
+            text.text = "Looks like you're ready to go! Let's go try it out for real.";
             break;
         default:
 			break;

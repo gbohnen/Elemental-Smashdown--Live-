@@ -49,7 +49,6 @@
      <Compile Include="Assets\_Scripts\Card.cs" />
      <Compile Include="Assets\_Scripts\CardRotating.cs" />
      <Compile Include="Assets\_Scripts\Deck.cs" />
-     <Compile Include="Assets\_Scripts\DemoPanels.cs" />
      <Compile Include="Assets\_Scripts\HUD\CardsRemaining.cs" />
      <Compile Include="Assets\_Scripts\HUD\MovesRemaining.cs" />
      <Compile Include="Assets\_Scripts\HUD\Player1Score.cs" />
@@ -58,27 +57,37 @@
      <Compile Include="Assets\_Scripts\HUD\movesRemaining1.cs" />
      <Compile Include="Assets\_Scripts\HUD\movesText.cs" />
      <Compile Include="Assets\_Scripts\Indicator.cs" />
-     <Compile Include="Assets\_Scripts\MenuTips.cs" />
+     <Compile Include="Assets\_Scripts\Menus\DemoPanels.cs" />
+     <Compile Include="Assets\_Scripts\Menus\MenuTips.cs" />
      <Compile Include="Assets\_Scripts\Menus\Menus.cs" />
      <Compile Include="Assets\_Scripts\Menus\PageCount.cs" />
      <Compile Include="Assets\_Scripts\Menus\PauseMenu.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialButtons.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialPanel.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialText.cs" />
+     <Compile Include="Assets\_Scripts\Menus\UITutorial.cs" />
      <Compile Include="Assets\_Scripts\MonoPlayer.cs" />
      <Compile Include="Assets\_Scripts\NotificationList.cs" />
      <Compile Include="Assets\_Scripts\PlayerController.cs" />
      <Compile Include="Assets\_Scripts\QuadBackground.cs" />
      <Compile Include="Assets\_Scripts\QuestCard.cs" />
      <Compile Include="Assets\_Scripts\Quests\Quest0.cs" />
+     <Compile Include="Assets\_Scripts\ResurrectionList.cs" />
+     <Compile Include="Assets\_Scripts\SampleButton.cs" />
      <Compile Include="Assets\_Scripts\SoundManager.cs" />
      <Compile Include="Assets\_Scripts\Soundtrack.cs" />
      <Compile Include="Assets\_Scripts\TurnButton.cs" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

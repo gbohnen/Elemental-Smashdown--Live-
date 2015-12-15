@@ -12,12 +12,17 @@ public class PlayerController : MonoBehaviour
 {
 
     public static PlayerTurn whichTurn = PlayerTurn.Player1;
+    public static PlayerController instance = null;
     public Card player1card;
     public Card player2card;
     public bool player1selected = false;
     public bool player2selected = false;
     public Card[] player1Hand;
     public Card[] player2Hand;
+
+    public bool hasResed;
+    public bool player1space;
+    public bool player2space;
 
     public Transform cardReferenceTransform;
 
@@ -29,6 +34,11 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        instance = this;
+
+        hasResed = false;
+        player1space = false;
+        player2space = false;
 
         player1Hand = new Card[5];
         player2Hand = new Card[5];
@@ -274,7 +284,9 @@ public class PlayerController : MonoBehaviour
     void Player1Win(Card player1, Card player2)
     {
         player2card.dead = true;
+        player2space = true;
         NotificationList.instance.AddItem("Player 1's " + player1card.cardName.ToString() + " wins!");
+        ResurrectionList.instance.AddCard(player2card);
         FightSound(PlayerTurn.Player1);
         tiesTally = 0;
         if (whichTurn == PlayerTurn.Player2)
@@ -291,7 +303,9 @@ public class PlayerController : MonoBehaviour
     void Player2Win(Card player1, Card player2)
     {
         player1card.dead = true;
+        player1space = true;
 		NotificationList.instance.AddItem("Player 2's " + player2card.cardName.ToString() + " wins!");
+        ResurrectionList.instance.AddCard(player1card);
         FightSound(PlayerTurn.Player2);
         tiesTally = 0;
         if (whichTurn == PlayerTurn.Player1)
@@ -309,7 +323,11 @@ public class PlayerController : MonoBehaviour
     {
         player2card.dead = true;
         player1card.dead = true;
+        player1space = true;
+        player2space = true;
         NotificationList.instance.AddItem("It's a tie...");
+        ResurrectionList.instance.AddCard(player1card);
+        ResurrectionList.instance.AddCard(player2card);
         tiesTally++;
         if (tiesTally >= 3)
         {
@@ -388,7 +406,6 @@ public class PlayerController : MonoBehaviour
                 player1Hand[i].flipped = true;
                 StartCoroutine(ChangePosition(player1Hand[i], .5f, new Vector3(4 * i - 5, 5, 0)));
                 StartCoroutine(FlipCard(player1Hand[i], .5f));
-                //player1Hand[i].flipped = false;
                 player1Hand[i].selected = false;
                 player1Hand[i].dead = false;
                 player1Hand[i].belongsTo = PlayerTurn.Player1;
@@ -403,7 +420,6 @@ public class PlayerController : MonoBehaviour
                 player2Hand[i].flipped = true;
                 StartCoroutine(ChangePosition(player2Hand[i], .5f, new Vector3(4 * i - 5, -5, 0)));
                 StartCoroutine(FlipCard(player2Hand[i], .5f));
-                //player2Hand[i].flipped = false;
                 player2Hand[i].selected = false;
                 player2Hand[i].dead = false;
                 player2Hand[i].belongsTo = PlayerTurn.Player2;
@@ -430,6 +446,10 @@ public class PlayerController : MonoBehaviour
         MovesRemaining.movesLeft = 5;
 
         timeSinceAction = 0;
+
+        hasResed = false;
+        player2space = false;
+        player1space = false;
     }
 
     public void ChangeBackground()
@@ -531,28 +551,6 @@ public class PlayerController : MonoBehaviour
         temp.transform.eulerAngles = target;
     }
 
-    public void OnGUI()
-    {
-        //if (GUI.Button(new Rect(10, 100, 120, 30), "Save Game"))
-        //{
-        //    SaveData data = new SaveData(whichTurn, player1card, player2card, player1selected, player2selected, player1Hand, player2Hand);
-
-        //data.whichTurn = whichTurn;
-        //data.player1card = player1card;
-        //data.player2card = player2card;
-        //data.player1selected = player1selected;
-        //data.player2selected = player2selected;
-        //data.player1Hand = player1Hand;
-        //data.player2Hand = player2Hand;
-
-        //    SaveLoad.Save();
-        //}
-        //if (GUI.Button(new Rect(10, 140, 120, 30), "Load Last Game"))
-        //{
-        //    SaveLoad.Load();
-        //}
-    }
-
     public void CheckBothSelected()
     {
         // call the fight method
@@ -577,10 +575,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-	public void Mulligan()
-	{
-		// check the current player
-		//int handSize = whichTurn.
-		// add the cards back to the deck
-	}
+    public void Resurrect(Card temp)
+    {
+        if (whichTurn == PlayerTurn.Player1)
+        {
+
+        }
+        else
+        {
+
+        }
+
+    }
 }
