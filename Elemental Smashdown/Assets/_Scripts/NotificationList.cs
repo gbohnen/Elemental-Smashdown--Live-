@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
+[SerializeAll]
 public class NotificationList : MonoBehaviour {
 
     public static NotificationList instance = null;

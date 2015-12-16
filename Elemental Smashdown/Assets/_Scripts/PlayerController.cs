@@ -8,6 +8,7 @@ public enum PlayerTurn
     Player2
 }
 
+[SerializeAll]
 public class PlayerController : MonoBehaviour
 {
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         instance = this;
 
         hasResed = false;

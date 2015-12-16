@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[SerializeAll]
 public class Deck : MonoBehaviour {
 
     public static int cardsRemaining;

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TurnButton : MonoBehaviour {
 
-    public GameObject playerLight;
     public GameObject indicator;
 	public GameObject player1tag;
 	public GameObject player2tag;
@@ -47,15 +46,12 @@ public class TurnButton : MonoBehaviour {
         // switch players
         if (PlayerController.whichTurn == PlayerTurn.Player1)
         {
-
-			StartCoroutine(ChangePosition(playerLight, .8f, lightpos2));
             StartCoroutine(ChangePosition(indicator, .8f, quadpos2));
 
             PlayerController.whichTurn = PlayerTurn.Player2;
         }
         else
         {
-			StartCoroutine(ChangePosition(playerLight, .8f, lightpos1));
             StartCoroutine(ChangePosition(indicator, .8f, quadpos1));
 
             PlayerController.whichTurn = PlayerTurn.Player1;

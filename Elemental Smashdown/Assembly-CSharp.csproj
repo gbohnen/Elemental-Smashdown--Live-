@@ -45,6 +45,31 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\AddSomeForce.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\AdditionalData.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\AdditionalDataStorage.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\ArrayOfPrefabs.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\CentreAndPointMe.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\ChangeColor.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\CharacterMotor.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\ColorMe.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\CreateChildSphere.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\DeleteComponent.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\DeletedComponent.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\HelloWorld.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\IsDeserializing.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\KeepAReference.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\Movement.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\OpenDoor.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\PauseMenu.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\RenameObject.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\SaveAndLoad.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\ScaleObject.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\Spawner.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\SwitchMesh.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\TestCoroutines.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\TestLoading.cs" />
+     <Compile Include="Assets\UnitySerializerExamples\Scripts\VariablesToSave.cs" />
      <Compile Include="Assets\_Scripts\Background.cs" />
      <Compile Include="Assets\_Scripts\Card.cs" />
      <Compile Include="Assets\_Scripts\CardRotating.cs" />
@@ -61,7 +86,7 @@
      <Compile Include="Assets\_Scripts\Menus\MenuTips.cs" />
      <Compile Include="Assets\_Scripts\Menus\Menus.cs" />
      <Compile Include="Assets\_Scripts\Menus\PageCount.cs" />
-     <Compile Include="Assets\_Scripts\Menus\PauseMenu.cs" />
+     <Compile Include="Assets\_Scripts\Menus\PauseMenu24.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialButtons.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialPanel.cs" />
      <Compile Include="Assets\_Scripts\Menus\TutorialText.cs" />
@@ -77,6 +102,8 @@
      <Compile Include="Assets\_Scripts\SoundManager.cs" />
      <Compile Include="Assets\_Scripts\Soundtrack.cs" />
      <Compile Include="Assets\_Scripts\TurnButton.cs" />
+     <None Include="Assets\Plugins\OpenUnityTools\unityserializer-ng\license.txt" />
+     <None Include="Assets\UnitySerializerExamples\readme.txt" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
@@ -95,6 +122,10 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{A6E4F227-B50F-6EFD-CFB2-A112DA544B2B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

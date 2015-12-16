@@ -13,6 +13,7 @@ public class ResurrectionButton {
     public Sprite cardSprite;
 }
 
+[SerializeAll]
 public class ResurrectionList : MonoBehaviour {
 
     public static ResurrectionList instance;
